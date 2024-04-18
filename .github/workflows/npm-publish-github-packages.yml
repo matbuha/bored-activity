@@ -18,13 +18,18 @@ jobs:
         with:
           node-version: '20.11.1'  # Ensure this matches the version you use
           registry-url: 'https://npm.pkg.github.com/'
+          scope: '@matbuha'
       
       - name: Install Dependencies
         run: npm ci  # Uses package-lock.json to install dependencies
+      - name: Configure npm
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+          echo "@matbuha:registry=https://npm.pkg.github.com" >> .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Publish to GitHub Packages
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-          NPM_CONFIG_REGISTRY: "https://npm.pkg.github.com/"
-          NPM_CONFIG_USERCONFIG: ".npmrc"
