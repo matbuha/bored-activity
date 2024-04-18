@@ -4,19 +4,24 @@
   "main": "index.js",
   "type": "module",
   "engines": {
-    "node": ">= 14.0.0",
-    "npm": ">= 6.0.0"
+    "node": ">= 20.11.1",
+    "npm": ">= 10.5.0"
   },
   "homepage": "https://github.com/matbuha/bored-activity",
   "repository": {
     "type": "git",
-    "url": "https://github.com/matbuha/bored-activity.git" 
+    "url": "git+https://github.com/matbuha/bored-activity.git"
   },
   "bugs": {
     "url": "https://github.com/matbuha/bored-activity/issues"
   },
-  "keywords": ["axios", "express", "ejs", "http"],
-  "author": "Ariel Ben Zikri <arielbenzikri@gmail.com>",
+  "keywords": [
+    "axios",
+    "express",
+    "ejs",
+    "http"
+  ],
+  "author": "Ariel Ben Zikri",
   "contributors": [],
   "scripts": {
     "start": "node index.js",
