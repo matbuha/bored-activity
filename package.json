@@ -1,5 +1,5 @@
 {
-  "name": "5.3-axios",
+  "name": "@yourusername/5.3-axios",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -7,24 +7,28 @@
     "node": ">= 14.0.0",
     "npm": ">= 6.0.0"
   },
-  "homepage": "",
+  "homepage": "https://github.com/matbuha/bored-activity",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/matbuha/bored-activity.git" 
   },
-  "bugs": "",
-  "keywords": [],
-  "author": "",
+  "bugs": {
+    "url": "https://github.com/matbuha/bored-activity/issues"
+  },
+  "keywords": ["axios", "express", "ejs", "http"],
+  "author": "Ariel Ben Zikri <arielbenzikri@gmail.com>",
   "contributors": [],
   "scripts": {
     "start": "node index.js",
-    "dev": "",
-    "test": ""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "description": "",
+  "description": "A simple project using Axios, Express, and EJS for HTTP requests.",
   "dependencies": {
     "axios": "^1.6.8",
     "ejs": "^3.1.10",
     "express": "^4.19.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
