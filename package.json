@@ -1,6 +1,10 @@
 {
   "name": "@matbuha/5.3-axios",
   "version": "1.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+
   "main": "index.js",
   "type": "module",
   "engines": {
@@ -32,8 +36,5 @@
     "axios": "^1.6.8",
     "ejs": "^3.1.10",
     "express": "^4.19.2"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
