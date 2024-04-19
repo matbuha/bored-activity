@@ -28,11 +28,10 @@ jobs:
           echo "@matbuha:registry=https://npm.pkg.github.com/" >> .npmrc
           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_GitHub_Token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
       - name: Publish to GitHub Packages
         run: |
-          npm login
           npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_GitHub_Token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
