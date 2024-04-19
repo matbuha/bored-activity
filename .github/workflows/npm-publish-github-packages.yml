@@ -8,9 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
@@ -18,31 +18,3 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-
-# jobs:
-#   build-and-publish:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: read
-#       packages: write
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "lts/*"
-#           registry-url: "https://registry.npmjs.org"
-#           scope: '@matbuha'
-      
-#       - name: Install Dependencies
-#         run: npm ci  # Uses package-lock.json to install dependencies
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-
-#       - name: Publish to GitHub Packages
-#         run: |
-#           npm publish --userconfig=~/.npmrc --scope=@matbuha --registry=https://registry.npmjs.org/
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-#           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-#           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
