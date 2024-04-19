@@ -27,12 +27,11 @@ jobs:
           echo "registry=https://registry.npmjs.org/" > .npmrc
           echo "@matbuha:registry=https://npm.pkg.github.com/" >> .npmrc
           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+          echo "npm login"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_GitHub_Token }}
 
       - name: Publish to GitHub Packages
-        run: |
-          echo "npm login"
-          npm publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_GitHub_Token }}
