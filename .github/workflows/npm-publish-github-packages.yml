@@ -37,17 +37,12 @@ jobs:
       
       - name: Install Dependencies
         run: npm ci  # Uses package-lock.json to install dependencies
-      - name: Configure npm
-        run: |
-          echo "registry=https://registry.npmjs.org/" > .npmrc
-          echo "@matbuha:registry=https://npm.pkg.github.com/" >> .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
       - name: Publish to GitHub Packages
         run: |
-          npm publish --userconfig=~/.npmrc --registry=https://registry.npmjs.org/
+          npm publish --userconfig=~/.npmrc --scope=@matbuha --registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
