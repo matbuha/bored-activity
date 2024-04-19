@@ -17,8 +17,7 @@ jobs:
           scope: '@matbuha'
       - run: npm ci
       - run: |
-          npm login --scope=@matbuha --registry=https://npm.pkg.github.com
-          npm publish --registry=https://npm.pkg.github.com/
+          npm publis --scope=@matbuha --registry=https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
