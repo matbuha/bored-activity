@@ -4,51 +4,51 @@ on:
   push:
     branches:
       - main  # Set this to your main branch or any other branch you want
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       # Setup .npmrc file to publish to npm
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           registry-url: 'https://registry.npmjs.org'
+#           scope: '@matbuha'
+#       - run: npm ci
+#       - run: npm publish --scope=@matbuha --registry=https://npm.pkg.github.com
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "lts/*"
+          registry-url: "https://registry.npmjs.org"
           scope: '@matbuha'
-      - run: npm ci
-      - run: npm publish --adduser --scope=@matbuha --registry=https://npm.pkg.github.com
+      
+      - name: Install Dependencies
+        run: npm ci  # Uses package-lock.json to install dependencies
+      - name: Configure npm
+        run: |
+          echo "registry=https://registry.npmjs.org/" > .npmrc
+          echo "@matbuha:registry=https://npm.pkg.github.com/" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
-# jobs:
-#   build-and-publish:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: read
-#       packages: write
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "lts/*"
-#           registry-url: "https://registry.npmjs.org"
-#           scope: '@matbuha'
-      
-#       - name: Install Dependencies
-#         run: npm ci  # Uses package-lock.json to install dependencies
-#       - name: Configure npm
-#         run: |
-#           echo "registry=https://registry.npmjs.org/" > .npmrc
-#           echo "@matbuha:registry=https://npm.pkg.github.com/" >> .npmrc
-#           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-
-#       - name: Publish to GitHub Packages
-#         run: |
-#           npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-#           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-#           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+      - name: Publish to GitHub Packages
+        run: |
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
