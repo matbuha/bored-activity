@@ -1,5 +1,5 @@
 {
-  "name": "@matbuha/5.3-axios",
+  "name": "@matbuha/NodeJS-with-AXIOS",
   "version": "1.0.0",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
